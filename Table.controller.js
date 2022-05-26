@@ -32,7 +32,7 @@ sap.ui.define([
 	FilterOperator,
 	DateFormat,
 	Item,
-	MessageBox
+	MessageBox,
 ) {
 	"use strict";
 
@@ -273,23 +273,23 @@ sap.ui.define([
 				bBadDate = false,
 				oModel = this.oModel;
 			// Покраска ячеек
-			this.oTable.getItems().forEach((e)=>{
-				let oRow = oModel.getProperty(e.getBindingContext().sPath); 
+			this.oTable.getItems().forEach((e) => {
+				let oRow = oModel.getProperty(e.getBindingContext().sPath);
 				bBadDate = false;
 				if (oRow.dateEnd && oRow.dateStart && oRow.dateStart.getTime() > oRow.dateEnd.getTime()) {
 					bBadDate = true
 				}
-				e.getCells().forEach((e2)=>{
-					let v = e2.getValue() 
-					if(!v){
+				e.getCells().forEach((e2) => {
+					let v = e2.getValue()
+					if (!v) {
 						bEmpty = true
 						e2.addStyleClass('error')
 					}
-					if(bBadDate && e2.getDateValue){
+					if (bBadDate && e2.getDateValue) {
 						e2.addStyleClass('error')
 					}
-					
-				}) 
+
+				})
 			})
 			// this.oModel.oData.tasks.forEach((e) => {
 			// 	for (let key in e) {
@@ -333,16 +333,15 @@ sap.ui.define([
 
 			var oExport = new Export({
 
-				// Type that will be used to generate the content. Own ExportType's can be created to support other formats
+				// mimeType: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+				// charset: "UTF-8",
+				//fileExtension: "xls"
+
 				exportType: new ExportTypeCSV({
-					separatorChar: ";"
+					separatorChar: ";",
+					charset: "utf-8",
+					fileExtension: "csv"
 				}),
-				// exportType: new ExportTypeCSV({
-				// 	separatorChar: "\t",
-				// 	 mimeType: "application/ms-excel",
-				// 	 charset: "utf-8",
-				// 	 fileExtension: "xls"
-				// }),
 
 				// Pass in the model created above
 				models: this.getView().getModel(),
@@ -367,11 +366,27 @@ sap.ui.define([
 				},
 				{
 					name: this.i18n.getText('colDateStart'),
-					template: { content: "{dateStart}"}
+					template: {
+						content: {
+							path: 'dateStart',
+							type: 'sap.ui.model.type.DateTime',
+							formatOptions: {
+								pattern: 'dd.MM.yyyy'
+							}
+						}
+					}
 				},
 				{
 					name: this.i18n.getText('colDateEnd'),
-					template: { content: "{dateEnd}" }
+					template: {
+						content: {
+							path: 'dateEnd',
+							type: 'sap.ui.model.type.DateTime',
+							formatOptions: {
+								pattern: 'dd.MM.yyyy'
+							}
+						}
+					}
 				}]
 			});
 
