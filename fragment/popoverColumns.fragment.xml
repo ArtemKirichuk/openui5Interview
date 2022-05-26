@@ -1,0 +1,20 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core">
+  <Popover
+      id="myListPopoverColumns"
+      title="Наименование колонок"
+      afterClose="handleAfterClose"
+      placement="Right">
+
+    <!-- <List
+        id="idElColumnlist"
+        mode="MultiSelect"
+        includeItemInSelection="true"
+        items="{oColumnsInfo>/aColumns}">
+      <StandardListItem
+          title="{oColumnsInfo>name}"
+          type="Active" />
+    </List> -->
+  </Popover>
+</core:FragmentDefinition>

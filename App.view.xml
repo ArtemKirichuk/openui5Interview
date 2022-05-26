@@ -1,0 +1,9 @@
+<mvc:View
+    xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m"
+	displayBlock="true">
+	<!--SpliApp просто используем для телефонов планшетов и ПК-->
+<!--    <Shell></Shell>-->
+		<App id="idApp"/>
+	
+</mvc:View>

@@ -1,0 +1,171 @@
+<mvc:View
+		height="100%"
+		controllerName="sap.m.sample.TableEditable.Table"
+		xmlns:mvc="sap.ui.core.mvc"
+		xmlns:core="sap.ui.core"
+		xmlns="sap.m">
+	<Page
+			showHeader="false"
+			enableScrolling="false"
+			class="sapUiContentPadding"
+			showNavButton="false">
+		<content>
+			<OverflowToolbar>
+				<ComboBox
+						placeholder="{i18n>colTypeTask}"
+						id="oFilterTypeTask"
+						items="{
+							path: '/Filters/0/values',
+							sorter: { path: 'text' }
+						}">
+					<core:Item
+							key="{text}"
+							text="{text}" />
+				</ComboBox>
+				<Input
+						width="200px"
+						id="userInput"
+						placeholder="{i18n>colDeveloper}"
+						showSuggestion="true"
+						showValueHelp="true"
+						valueHelpRequest=".fnUserDialog"
+						suggestionItems="{/Filters/1/values}">
+					<suggestionItems>
+						<core:Item text="{text}" />
+					</suggestionItems>
+				</Input>
+				<DatePicker
+						width="200px"
+						id="DPStart"
+						placeholder="{i18n>colDateStart}"
+						change="fnChDate"
+						displayFormat="dd.MM.yyyy"
+						class="" />
+				<DatePicker
+						width="200px"
+						id="DPEnd"
+						placeholder="{i18n>colDateEnd}"
+						change="fnChDate"
+						displayFormat="dd.MM.yyyy"
+						class="" />
+				<Button
+						text="{i18n>iFilter}"
+						press="onSearch"
+						icon="sap-icon://filter" />
+				<Button
+						text="{i18n>iClearFilter}"
+						press="fnClearFilter"
+						type="Transparent" />
+				<Button
+						text="{i18n>iReset}"
+						press="onReset"
+						type="Transparent" />
+			</OverflowToolbar>
+			<Table
+					id="idTaskTable"
+					growing="true"
+					growingThreshold="10"
+					paste="onPaste">
+				<headerToolbar>
+					<OverflowToolbar id="otbSubheader">
+						<Title
+								text="{i18n>tasksMonth}"
+								level="H2" />
+						<Button
+								id="idSettings"
+								press="onOpenColumnManager"
+								icon="sap-icon://action-settings" />
+						<Button
+								id="addUserButton"
+								icon="sap-icon://add"
+								tooltip="{i18n>iCreate}"
+								visible="false"
+								press=".onCreate">
+							<layoutData>
+								<OverflowToolbarLayoutData priority="NeverOverflow" />
+							</layoutData>
+						</Button>
+					</OverflowToolbar>
+				</headerToolbar>
+
+
+				<columns>
+					<Column width="12em">
+						<Text text="{i18n>colNameTask}" />
+					</Column>
+					<Column width="10em">
+						<Text text="{i18n>colTypeTask}" />
+					</Column>
+					<Column width="15em">
+						<Text text="{i18n>colDeveloper}" />
+					</Column>
+					<Column width="8em">
+
+						<Text text="{i18n>colDateStart}" />
+					</Column>
+					<Column width="8em">
+						<Text text="{i18n>colDateEnd}" />
+					</Column>
+				</columns>
+				<items>
+					<ColumnListItem vAlign="Middle">
+						<cells>
+							<Text text="{nameTask}" />
+							<Text text="{typeTask}" />
+							<Text text="{developer}" />
+							<Text text="{
+								path: 'dateStart',
+								type: 'sap.ui.model.type.DateTime',
+								formatOptions: {
+									pattern: 'dd.MM.yyyy'
+								}
+							}" />
+							<Text text="{
+								path: 'dateEnd',
+								type: 'sap.ui.model.type.Date',
+								formatOptions: {
+									pattern: 'dd.MM.yyyy'
+								}
+							}" />
+						</cells>
+					</ColumnListItem>
+				</items>
+			</Table>
+		</content>
+		<footer>
+			<OverflowToolbar id="otbFooter">
+				<ToolbarSpacer />
+				<Button
+						id="editButton"
+						text="{i18n>Edit}"
+						type="Transparent"
+						press="onEdit" />
+				<Button
+						id="saveButton"
+						text="{i18n>Save}"
+						type="Transparent"
+						press="onSave"
+						visible="false" />
+				<Button
+						id="cancelButton"
+						text="{i18n>Cancel}"
+						type="Transparent"
+						press="onCancel"
+						visible="false" />
+				<Button
+						id="excelButton"
+						text="{i18n>Excel}"
+						type="Transparent"
+						press="onExcel"
+						visible="true" />
+				<!-- <Button
+						text="Order"
+						press="onOrder">
+					<layoutData>
+						<OverflowToolbarLayoutData moveToOverflow="false" />
+					</layoutData>
+				</Button> -->
+			</OverflowToolbar>
+		</footer>
+	</Page>
+</mvc:View>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Table - Editable</title>
+    <!-- data-sap-ui-xx-supportedLanguages='' -->
+    <script
+      id="sap-ui-bootstrap"
+      src="./resources/sap-ui-core.js"
+      data-sap-ui-theme="sap_fiori_3"
+      data-sap-ui-language="RU"
+      data-sap-ui-resourceroots='{
+			"sap.m.sample.TableEditable": "./",
+			"sap.ui.demo.mock": "mockdata"
+		}'
+      data-sap-ui-compatVersion="edge"
+      data-sap-ui-async="true"
+      data-sap-ui-frameOptions="trusted"
+      data-sap-ui-oninit="module:sap/ui/core/ComponentSupport"
+    ></script>
+    <script>
+      sap.ui.getCore().attachInit(function () {
+        new sap.ui.core.ComponentContainer({
+          name: "sap.m.sample.TableEditable",
+        }).placeAt("content");
+        return;
+      });
+    </script>
+    <style>
+      html,
+      body {
+        height: 100%;
+        overflow: hidden;
+      }
+    </style>
+  </head>
+
+  <body class="sapUiBody sapUiSizeCozy" id="content">
+    <!-- <div
+      data-sap-ui-component
+      data-name="sap.m.sample.TableEditable"
+      data-height="100%"
+      data-id="container"
+      data-settings='{"id" : "sap.m.sample.TableEditable"}'
+      style="height: 100%"
+    ></div> -->
+  </body>
+</html>

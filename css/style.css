@@ -1,0 +1,10 @@
+.ColumnManager > .sapMInputBaseContentWrapper{
+    display: none;
+}
+.idDialogColumns  .sapMCb{
+    position: absolute;
+    right: 0;
+}
+.error{
+    background: red;
+}
