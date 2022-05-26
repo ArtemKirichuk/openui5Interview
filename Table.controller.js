@@ -270,21 +270,40 @@ sap.ui.define([
 		//Check
 		fnCheckTable: function () {
 			let bEmpty = false,
-				bBadDate = false;
+				bBadDate = false,
+				oModel = this.oModel;
 			// Покраска ячеек
-			// this.oTable.getItems()[0].getCells()[0].addStyleClass('error')
-			this.oModel.oData.tasks.some((e) => {
-				for (let key in e) {
-					if (!e[key]) {
-						bEmpty = true
-					}
-				}
-
-				if (e.dateEnd && e.dateStart && e.dateStart.getTime() > e.dateEnd.getTime()) {
+			this.oTable.getItems().forEach((e)=>{
+				let oRow = oModel.getProperty(e.getBindingContext().sPath); 
+				bBadDate = false;
+				if (oRow.dateEnd && oRow.dateStart && oRow.dateStart.getTime() > oRow.dateEnd.getTime()) {
 					bBadDate = true
 				}
-
+				e.getCells().forEach((e2)=>{
+					let v = e2.getValue() 
+					if(!v){
+						bEmpty = true
+						e2.addStyleClass('error')
+					}
+					if(bBadDate && e2.getDateValue){
+						e2.addStyleClass('error')
+					}
+					
+				}) 
 			})
+			// this.oModel.oData.tasks.forEach((e) => {
+			// 	for (let key in e) {
+			// 		if (!e[key]) {
+			// 			bEmpty = true
+			// 		}
+			// 		this.oTable.getItems()[0].getCells()[0].addStyleClass('error')
+			// 	}
+
+			// 	if (e.dateEnd && e.dateStart && e.dateStart.getTime() > e.dateEnd.getTime()) {
+			// 		bBadDate = true
+			// 	}
+
+			// })
 			if (bEmpty || bBadDate) {
 				let sEmpty = bEmpty ? '1. ' + this.i18n.getText('iEmpty') : '';
 				let sDate = bBadDate ? '2. ' + this.i18n.getText('iDateError') : '';
